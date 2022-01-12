@@ -3,7 +3,7 @@ import FriendItem from "./FriendItems";
 
 export default function FriendList({ data, onDelete, onFavorite }) {
   return (
-    <ul className="list__wrapper">
+    <ul className="list__wrapper" data-testid="list-wrapper">
       {data.map((item) => (
         <FriendItem
           key={item.id}

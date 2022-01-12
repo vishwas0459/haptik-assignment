@@ -52,8 +52,8 @@ function App() {
     if (name) {
       // filter the data
       const regex = new RegExp(`^${name}`, "i");
-      const filtersList = data.sort().filter((v) => {
-        return regex.test(v.name);
+      const filtersList = data.sort().filter((item) => {
+        return regex.test(item.name);
       });
       setData(filtersList);
     } else {
@@ -63,8 +63,8 @@ function App() {
 
   const handleAddFriend = (event) => {
     if (event.key === "Enter" && name !== "") {
-      if (!/^[a-zA-Z ]*$/.test(name) || name.length < 3 || name.length > 15) {
-        setError("Please enter valid name with min 3 and max 15 character!");
+      if (!/^[a-zA-Z ]*$/.test(name) || name.length < 4 || name.length > 15) {
+        setError("Please enter valid name with min 4 and max 15 character!");
         return;
       }
       const storedData = getLocalStorageData();
@@ -89,10 +89,6 @@ function App() {
 
   const handleChange = (event) => {
     const { value: name } = event.target;
-    if (name.length > 20) {
-      setError("Please enter max 20 character");
-      return;
-    }
     setError("");
     setName(name);
   };
@@ -113,7 +109,6 @@ function App() {
   };
 
   const handleFavorite = (id) => {
-    console.log("handleFavorite", id);
     const copiedData = [...data];
     const index = copiedData.findIndex((item) => item.id === id);
     const user = { ...copiedData[index] };
@@ -135,7 +130,11 @@ function App() {
     <div className="container">
       <header className="header">
         <h1 className="title">Friends List</h1>
-        <span className="icon" onClick={handleSort}>
+        <span
+          className="icon"
+          onClick={handleSort}
+          data-testid="sortBy-fav-icon"
+        >
           <i className={`${sortBy ? "fas" : "far"} fa-star`}></i>
         </span>
       </header>

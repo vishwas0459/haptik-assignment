@@ -7,12 +7,13 @@ export default function Pagination({
   currentPage,
 }) {
   const pageCount = Math.ceil(count / pageSize);
-  if (pageCount === 1) return null;
+  if (pageCount <= 1) return null;
 
   return (
-    <ul className="pagination">
+    <ul className="pagination" data-testid="pagination">
       <li>
         <button
+          data-testid="prev-btn"
           disabled={currentPage === 1}
           className="page__item"
           onClick={() => onPageChange(currentPage - 1)}
@@ -22,6 +23,7 @@ export default function Pagination({
       </li>
       <li>
         <button
+          data-testid="next-btn"
           disabled={currentPage === pageCount}
           className="page__item"
           onClick={() => onPageChange(currentPage + 1)}

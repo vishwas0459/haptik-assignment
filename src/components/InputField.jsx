@@ -18,10 +18,15 @@ export default function InputField({
         placeholder={placeholder}
         type="text"
         value={value}
-        minLength={3}
+        minLength={4}
         maxLength={15}
+        data-testid="input-name"
       />
-      {error && <p className="input__error">{error}</p>}
+      {error && (
+        <p data-testid="error-msg" className="input__error">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
